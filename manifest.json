@@ -1,0 +1,38 @@
+{
+  "manifest_version": 2,
+
+  "name": "Keystone Designer Tools",
+  "description": "This extension allows the user to launch a comparison tool from Keystone.",
+  "version": "1.0",
+  "background": {
+    "scripts": [ "background.js" ]
+  },
+  "content_scripts":[
+    {
+      "matches": ["*://cctst.cpq.awsdev.infor.com/*","*://wbtst.cpq.awsdev.infor.com/*","*://wbax1.cpq.awsdev.infor.com/*", "*://cpqwb.inforcloudsuite.com/*"],
+      "js": ["workbench/get-comparison.js"],
+      "all_frames": true      
+    },
+    {
+      "matches": ["*://*.pcm.infor.com/web/*", "*://*.cpq.awsdev.infor.com/web/*", "*://*.inforcloudsuite.com/web/*"],
+      "js": ["runtime/highlight-forms.js"],
+      "all_frames": true      
+    },
+    {
+      "matches": ["*://*.pcm.infor.com/designer/*", "*://*.cpq.awsdev.infor.com/designer/*", "*://*.inforcloudsuite.com/designer/*"],
+      "js": ["designer/find-version.js"],
+      "all_frames": true
+    }
+  ],
+   "browser_action": {
+     "default_icon": "icon.png",
+     "default_popup": "popup/popup.html"
+   },
+  "permissions": [
+    "nativeMessaging",
+    "activeTab",
+    "webRequest",    
+    "storage",
+    "*://*/*"
+  ]
+}
